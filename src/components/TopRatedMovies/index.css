@@ -1,0 +1,32 @@
+.tp-movies-page {
+  background-color: #031422;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tp-page-title {
+  color: #ffffff;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tp-movies-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #e50914;
+}

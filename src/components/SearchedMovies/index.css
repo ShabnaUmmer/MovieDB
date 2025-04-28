@@ -1,0 +1,37 @@
+.sp-movies-page {
+  padding: 20px;
+  margin: 0 auto;
+  background-color: #031422;
+}
+
+.sp-page-title {
+  color: #ffffff;
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.loading,
+.error {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.no-results {
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.sp-movies-grid {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-bottom: 10px;
+}
