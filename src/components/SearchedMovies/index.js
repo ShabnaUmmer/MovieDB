@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import {withRouter} from 'react-router-dom'
 import MovieCard from '../MovieCard'
 import Pagination from '../Pagination'
@@ -101,7 +102,13 @@ class SearchedMovies extends Component {
       searchQuery,
     } = this.state
 
-    if (loading) return <div className="loading">Loading...</div>
+    if (loading) {
+      return (
+        <div className="loader-container" data-testid="loader">
+          <Loader type="Oval" color="#ffffff" height={50} />
+        </div>
+      )
+    }
     if (error) return <div className="error">Error: {error}</div>
 
     return (

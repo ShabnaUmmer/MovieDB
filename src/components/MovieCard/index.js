@@ -18,16 +18,15 @@ class MovieCard extends Component {
           className="movie-poster"
         />
         <div className="movie-info">
-          <h3 className="movie-title">{movie.title}</h3>
-          <div className="title-star">
-            <Link to={`/movie/${movie.id}`} className="view-details-btn">
-              View Details
-            </Link>
-            <div className="movie-rating">
-              <span className="rating-star">★</span>
-              <span>{movie.vote_average.toFixed(1)}</span>
-            </div>
+          <div className="movie-rating">
+            <span className="rating-star">★</span>
+            <span>{movie.vote_average.toFixed(1)}</span>
           </div>
+          <h3 className="movie-title">{movie.title}</h3>
+
+          <Link to={`/movie/${movie.id}`} className="view-details-btn">
+            <button className="vd-btn">View Details</button>
+          </Link>
         </div>
       </div>
     )

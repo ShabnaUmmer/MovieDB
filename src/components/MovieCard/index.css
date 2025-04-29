@@ -10,12 +10,6 @@
   justify-content: space-between;
 }
 
-.title-star {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .movie-title {
   font-size: 24px;
@@ -25,10 +19,12 @@
   overflow-wrap: break-word;
   word-break: break-word;
   white-space: normal;
+  padding-top: 0;
+  margin-top: 0;
 }
 .movie-poster {
   height: 400px;
-  width: 400px;
+  width: auto;
   border-radius: 12px;
 }
 
@@ -40,11 +36,14 @@
   color: #f5c518;
   font-size: 24px;
   font-weight: bold;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  padding-top: 10px;
 }
 
 .view-details-btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 0;
   background-color: #042e64;
   color: white;
   text-decoration: none;
@@ -52,6 +51,15 @@
   font-size: 0.9rem;
 }
 
-.view-details-btn:hover {
+.vd-btn:hover {
   background-color: #0099c3;
+}
+.vd-btn {
+  background: none;
+  border: none;
+  text-decoration: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 20px;
+  padding: 10px 20px;
 }

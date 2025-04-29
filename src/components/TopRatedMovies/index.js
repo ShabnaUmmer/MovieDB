@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Loader from 'react-loader-spinner'
 import MovieCard from '../MovieCard'
 import Pagination from '../Pagination'
 import {API_KEY, API_BASE_URL} from '../../config'
@@ -45,7 +46,13 @@ class TopRatedMovies extends Component {
   render() {
     const {movies, currentPage, totalPages, loading, error} = this.state
 
-    if (loading) return <div className="loading">Loading...</div>
+    if (loading) {
+      return (
+        <div className="loader-container" data-testid="loader">
+          <Loader type="Oval" color="#ffffff" height={50} />
+        </div>
+      )
+    }
     if (error) return <div className="error">Error: {error}</div>
 
     return (

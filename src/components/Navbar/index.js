@@ -51,7 +51,7 @@ class Navbar extends Component {
           </ul>
           <form onSubmit={this.handleSearchSubmit} className="navbar-search">
             <input
-              type="search"
+              type="text"
               placeholder="Search movies..."
               value={searchQuery}
               onChange={this.handleSearchChange}

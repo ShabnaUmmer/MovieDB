@@ -11,12 +11,10 @@
 }
 
 .movies-grid {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 30px;
   margin-bottom: 10px;
 }
 
@@ -42,4 +40,11 @@
   .movies-grid {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
+}
+
+.loader-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -62,14 +62,18 @@ class MovieDetails extends Component {
 
     return (
       <div className="movie-details-page">
-        <div
-          className="movie-backdrop"
-          style={{
-            backgroundImage: `url(${IMAGE_BASE_URL}${BACKDROP_SIZE}${movie.backdrop_path})`,
-          }}
-        >
+        <div className="movie-backdrop">
           <div className="backdrop-overlay">
             <div className="movie-poster-container">
+              <img
+                src={
+                  movie.poster_path
+                    ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+                    : 'https://via.placeholder.com/300x450?text=No+Poster'
+                }
+                alt={movie.title}
+                className="md-movie-poster"
+              />
               <div className="movie-header">
                 <h1 className="md-movie-title">{movie.title}</h1>
                 <div className="genres">
@@ -100,15 +104,6 @@ class MovieDetails extends Component {
 
         <div className="movie-content">
           <section className="movie-overview-container">
-            <img
-              src={
-                movie.poster_path
-                  ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
-                  : 'https://via.placeholder.com/300x450?text=No+Poster'
-              }
-              alt={movie.title}
-              className="md-movie-poster"
-            />
             <div className="movie-overview">
               <h2>Overview</h2>
               <p>{movie.overview}</p>

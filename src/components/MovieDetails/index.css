@@ -1,6 +1,9 @@
 .movie-poster-container {
   display: flex;
   gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .movie-details-page {
@@ -21,7 +24,7 @@
 }
 .md-movie-poster {
   height: auto;
-  width: 200px;
+  width: 300px;
 }
 
 .cast-grid {
@@ -33,7 +36,7 @@
 
 .md-movie-title {
   color: rgb(247, 184, 12);
-  font-size: 28px;
+  font-size: 30px;
 }
 
 .rating {
@@ -80,4 +83,13 @@
   border: 2px solid #ffffff;
   border-radius: 20px;
   padding: 15px;
+}
+
+@media(max-width: 768px){
+  .movie-poster-container{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
 }

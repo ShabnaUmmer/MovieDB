@@ -1,5 +1,5 @@
 import {Component} from 'react'
-import {FaChevronLeft, FaChevronRight} from 'react-icons/fa'
+
 import './index.css'
 
 class Pagination extends Component {
@@ -61,7 +61,7 @@ class Pagination extends Component {
           disabled={currentPage === 1}
           className="pagination-button"
         >
-          <FaChevronLeft />
+          Prev
         </button>
 
         {startPage > 1 && (
@@ -111,7 +111,7 @@ class Pagination extends Component {
           disabled={currentPage === totalPages}
           className="pagination-button"
         >
-          <FaChevronRight />
+          Next
         </button>
       </div>
     )
