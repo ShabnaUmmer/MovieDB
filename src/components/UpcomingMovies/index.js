@@ -50,7 +50,7 @@ class UpcomingMovies extends Component {
 
     return (
       <div className="up-movies-page">
-        <h1 className="up-page-title">Upcoming Movies</h1>
+        <h1 className="up-page-title">Upcoming</h1>
         <div className="up-movies-grid">
           {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />

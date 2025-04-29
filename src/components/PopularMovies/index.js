@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import Navbar from '../Navbar'
 import MovieCard from '../MovieCard'
 import Pagination from '../Pagination'
 import {API_KEY, API_BASE_URL} from '../../config'
@@ -50,7 +51,8 @@ class PopularMovies extends Component {
 
     return (
       <div className="movies-page">
-        <h1 className="page-title">Popular Movies</h1>
+        <Navbar />
+        <h1 className="page-title">Popular</h1>
         <div className="movies-grid">
           {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />

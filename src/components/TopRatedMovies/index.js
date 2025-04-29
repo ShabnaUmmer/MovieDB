@@ -50,7 +50,7 @@ class TopRatedMovies extends Component {
 
     return (
       <div className="tp-movies-page">
-        <h1 className="tp-page-title">TopRated Movies</h1>
+        <h1 className="tp-page-title">TopRated</h1>
         <div className="tp-movies-grid">
           {movies.map(movie => (
             <MovieCard key={movie.id} movie={movie} />
