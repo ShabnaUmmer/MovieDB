@@ -64,46 +64,7 @@ class Pagination extends Component {
           Prev
         </button>
 
-        {startPage > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={() => this.handlePageClick(1)}
-              className="pagination-button"
-            >
-              1
-            </button>
-            {startPage > 2 && <span className="pagination-ellipsis">...</span>}
-          </>
-        )}
-
-        {pages.map(page => (
-          <button
-            type="button"
-            key={page}
-            onClick={() => this.handlePageClick(page)}
-            className={`pagination-button ${
-              currentPage === page ? 'active' : ''
-            }`}
-          >
-            {page}
-          </button>
-        ))}
-
-        {endPage < totalPages && (
-          <>
-            {endPage < totalPages - 1 && (
-              <span className="pagination-ellipsis">...</span>
-            )}
-            <button
-              type="button"
-              onClick={() => this.handlePageClick(totalPages)}
-              className="pagination-button"
-            >
-              {totalPages}
-            </button>
-          </>
-        )}
+        <p className="current-page">{currentPage}</p>
 
         <button
           type="button"

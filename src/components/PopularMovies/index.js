@@ -39,7 +39,9 @@ class PopularMovies extends Component {
   }
 
   handlePageChange = page => {
-    this.fetchPopularMovies(page)
+    this.setState({currentPage: page}, () => {
+      this.fetchPopularMovies(page)
+    })
   }
 
   render() {

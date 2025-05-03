@@ -63,29 +63,27 @@ class SearchedMovies extends Component {
     )
   }
 
-  fetchSearchedMovies = page => {
+  fetchSearchedMovies = async page => {
     const {searchQuery} = this.state
     if (!searchQuery.trim()) return
 
     this.setState({loading: true, error: null})
-    fetch(
-      `${API_BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(
-        searchQuery,
-      )}&page=${page}`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        console.log(data)
-        this.setState({
-          movies: data.results,
-          currentPage: data.page,
-          totalPages: data.total_pages > 500 ? 500 : data.total_pages,
-          loading: false,
-        })
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/search/movie?api_key=${API_KEY}&language=en-US&query=${encodeURIComponent(
+          searchQuery,
+        )}&page=${page}`,
+      )
+      const data = await response.json()
+      this.setState({
+        movies: data.results,
+        currentPage: data.page,
+        totalPages: data.total_pages > 500 ? 500 : data.total_pages,
+        loading: false,
       })
-      .catch(error => {
-        this.setState({error: error.message, loading: false})
-      })
+    } catch (error) {
+      this.setState({error: error.message, loading: false})
+    }
   }
 
   handlePageChange = page => {

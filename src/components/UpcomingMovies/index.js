@@ -20,28 +20,22 @@ class UpcomingMovies extends Component {
     this.fetchUpcomingMovies(currentPage)
   }
 
-  fetchUpcomingMovies = page => {
+  fetchUpcomingMovies = async page => {
     this.setState({loading: true, error: null})
-    fetch(
-      `${API_BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`,
-    )
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok')
-        }
-        return response.json()
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`,
+      )
+      const data = await response.json()
+      this.setState({
+        movies: data.results,
+        currentPage: data.page,
+        totalPages: data.total_pages > 500 ? 500 : data.total_pages,
+        loading: false,
       })
-      .then(data => {
-        this.setState({
-          movies: data.results,
-          currentPage: data.page,
-          totalPages: data.total_pages > 500 ? 500 : data.total_pages,
-          loading: false,
-        })
-      })
-      .catch(error => {
-        this.setState({error: error.message, loading: false})
-      })
+    } catch (error) {
+      this.setState({error: error.message, loading: false})
+    }
   }
 
   handlePageChange = page => {

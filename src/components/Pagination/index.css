@@ -8,7 +8,7 @@
 
 .pagination-button {
   border-radius: 20px;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   border: 2px solid #097897;
   background: transparent;
   color: #67cfec;
@@ -37,4 +37,14 @@
   .pagination-button.hide-on-mobile {
     display: none;
   }
+}
+
+.current-page {
+  padding: 10px 20px;
+  border: 2px solid #097897;
+  background: transparent;
+  color: #67cfec;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 50%;
 }

@@ -20,23 +20,22 @@ class TopRatedMovies extends Component {
     this.fetchTopRatedMovies(currentPage)
   }
 
-  fetchTopRatedMovies = page => {
+  fetchTopRatedMovies = async page => {
     this.setState({loading: true, error: null})
-    fetch(
-      `${API_BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`,
-    )
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          movies: data.results,
-          currentPage: data.page,
-          totalPages: data.total_pages > 500 ? 500 : data.total_pages,
-          loading: false,
-        })
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`,
+      )
+      const data = await response.json()
+      this.setState({
+        movies: data.results,
+        currentPage: data.page,
+        totalPages: data.total_pages > 500 ? 500 : data.total_pages,
+        loading: false,
       })
-      .catch(error => {
-        this.setState({error: error.message, loading: false})
-      })
+    } catch (error) {
+      this.setState({error: error.message, loading: false})
+    }
   }
 
   handlePageChange = page => {
