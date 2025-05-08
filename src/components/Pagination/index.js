@@ -64,7 +64,7 @@ class Pagination extends Component {
           Prev
         </button>
 
-        <p className="current-page">{currentPage}</p>
+        <p className="current-page">1</p>
 
         <button
           type="button"
