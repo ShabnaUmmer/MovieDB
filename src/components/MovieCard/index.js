@@ -25,7 +25,9 @@ class MovieCard extends Component {
           <h3 className="movie-title">{movie.title}</h3>
 
           <Link to={`/movie/${movie.id}`} className="view-details-btn">
-            <button className="vd-btn">View Details</button>
+            <button type="button" className="vd-btn">
+              View Details
+            </button>
           </Link>
         </div>
       </div>

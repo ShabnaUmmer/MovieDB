@@ -63,7 +63,6 @@ class Pagination extends Component {
         >
           Prev
         </button>
-
         {pages.map(page => (
           <button
             key={page}
