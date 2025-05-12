@@ -1,5 +1,4 @@
 import {Component} from 'react'
-
 import './index.css'
 
 class Pagination extends Component {
@@ -12,7 +11,6 @@ class Pagination extends Component {
 
   handleNextClick = () => {
     const {onPageChange, currentPage, totalPages} = this.props
-
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1)
     }
@@ -54,23 +52,40 @@ class Pagination extends Component {
     )
 
     return (
-      <div className="pagination">
+      <div className="pagination" data-testid="pagination">
         <button
           type="button"
           onClick={this.handlePrevClick}
           disabled={currentPage === 1}
           className="pagination-button"
+          data-testid="prev-button"
+          aria-label="Previous page"
         >
           Prev
         </button>
 
-        <p className="current-page">{currentPage}</p>
+        {pages.map(page => (
+          <button
+            key={page}
+            onClick={() => this.handlePageClick(page)}
+            className={`pagination-button ${
+              page === currentPage ? 'active' : ''
+            }`}
+            data-testid={`page-${page}`}
+            aria-label={`Page ${page}`}
+            aria-current={page === currentPage ? 'page' : null}
+          >
+            {page}
+          </button>
+        ))}
 
         <button
           type="button"
           onClick={this.handleNextClick}
           disabled={currentPage === totalPages}
           className="pagination-button"
+          data-testid="next-button"
+          aria-label="Next page"
         >
           Next
         </button>

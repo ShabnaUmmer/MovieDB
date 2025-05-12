@@ -123,11 +123,13 @@ class SearchedMovies extends Component {
                 <MovieCard key={movie.id} movie={movie} />
               ))}
             </div>
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={this.handlePageChange}
-            />
+            {totalPages > 1 && (
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={this.handlePageChange}
+              />
+            )}
           </>
         )}
       </div>
