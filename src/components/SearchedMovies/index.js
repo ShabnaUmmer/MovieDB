@@ -86,8 +86,8 @@ class SearchedMovies extends Component {
     }
   }
 
-  handlePageChange = page => {
-    this.fetchSearchedMovies(page)
+  handlePageChange = pageNo => {
+    this.fetchSearchedMovies(pageNo)
   }
 
   render() {
@@ -125,9 +125,9 @@ class SearchedMovies extends Component {
             </div>
             {totalPages > 1 && (
               <Pagination
-                currentPage={currentPage}
+                apiCallback={this.handlePageChange}
                 totalPages={totalPages}
-                onPageChange={this.handlePageChange}
+                currentPage={currentPage}
               />
             )}
           </>

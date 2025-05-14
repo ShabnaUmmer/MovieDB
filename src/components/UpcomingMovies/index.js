@@ -38,8 +38,8 @@ class UpcomingMovies extends Component {
     }
   }
 
-  handlePageChange = page => {
-    this.fetchUpcomingMovies(page)
+  handlePageChange = pageNo => {
+    this.fetchUpcomingMovies(pageNo)
   }
 
   render() {
@@ -64,9 +64,9 @@ class UpcomingMovies extends Component {
         </div>
         {totalPages > 1 && (
           <Pagination
-            currentPage={currentPage}
+            apiCallback={this.handlePageChange}
             totalPages={totalPages}
-            onPageChange={this.handlePageChange}
+            currentPage={currentPage}
           />
         )}
       </div>

@@ -19,11 +19,6 @@
   color: white;
 }
 
-.pagination-ellipsis {
-  color: #67cfec;
-  font-size: 30px;
-}
-
 @media (max-width: 768px) {
   .pagination {
     flex-wrap: wrap;
@@ -32,10 +27,6 @@
   .pagination-button {
     padding: 0.5rem;
     min-width: 32px;
-  }
-
-  .pagination-button.hide-on-mobile {
-    display: none;
   }
 }
 

@@ -3,7 +3,6 @@ import {
   API_KEY,
   API_BASE_URL,
   IMAGE_BASE_URL,
-  BACKDROP_SIZE,
   PROFILE_SIZE,
   POSTER_SIZE,
 } from '../../config'

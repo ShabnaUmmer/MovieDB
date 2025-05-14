@@ -1,28 +1,51 @@
-import {Component} from 'react'
+import React from 'react'
 import './index.css'
 
-class Pagination extends Component {
-  handlePrevClick = () => {
-    const {currentPage, onPageChange} = this.props
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1)
-    }
+class Pagination extends React.Component {
+  state = {
+    pageNo: 1,
   }
 
-  handleNextClick = () => {
-    const {onPageChange, currentPage, totalPages} = this.props
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1)
-    }
+  onNextPage = () => {
+    const {apiCallback, totalPages} = this.props
+    this.setState(
+      prevState => {
+        if (prevState.pageNo < totalPages) {
+          return {
+            pageNo: prevState.pageNo + 1,
+          }
+        }
+        return prevState
+      },
+      () => {
+        const {pageNo} = this.state
+        apiCallback(pageNo)
+      },
+    )
   }
 
-  handlePageClick = page => {
-    const {onPageChange} = this.props
-    onPageChange(page)
+  onPrevPage = () => {
+    const {apiCallback} = this.props
+    this.setState(
+      prevState => {
+        if (prevState.pageNo > 1) {
+          return {
+            pageNo: prevState.pageNo - 1,
+          }
+        }
+        return prevState
+      },
+      () => {
+        const {pageNo} = this.state
+        apiCallback(pageNo)
+      },
+    )
   }
 
   render() {
-    const {currentPage, totalPages} = this.props
+    const {pageNo} = this.state
+    const {totalPages, apiCallback} = this.props
+
     const maxVisiblePages = 5
     let startPage
     let endPage
@@ -34,15 +57,15 @@ class Pagination extends Component {
       const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2)
       const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1
 
-      if (currentPage <= maxPagesBeforeCurrent) {
+      if (pageNo <= maxPagesBeforeCurrent) {
         startPage = 1
         endPage = maxVisiblePages
-      } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
+      } else if (pageNo + maxPagesAfterCurrent >= totalPages) {
         startPage = totalPages - maxVisiblePages + 1
         endPage = totalPages
       } else {
-        startPage = currentPage - maxPagesBeforeCurrent
-        endPage = currentPage + maxPagesAfterCurrent
+        startPage = pageNo - maxPagesBeforeCurrent
+        endPage = pageNo + maxPagesAfterCurrent
       }
     }
 
@@ -52,27 +75,24 @@ class Pagination extends Component {
     )
 
     return (
-      <div className="pagination" data-testid="pagination">
+      <div className="mb-3 pagination">
         <button
           type="button"
-          onClick={this.handlePrevClick}
-          disabled={currentPage === 1}
           className="pagination-button"
-          data-testid="prev-button"
-          aria-label="Previous page"
+          onClick={this.onPrevPage}
+          disabled={pageNo === 1}
         >
           Prev
         </button>
+
         {pages.map(page => (
           <button
+            type="button"
             key={page}
-            onClick={() => this.handlePageClick(page)}
-            className={`pagination-button ${
-              page === currentPage ? 'active' : ''
-            }`}
-            data-testid={`page-${page}`}
-            aria-label={`Page ${page}`}
-            aria-current={page === currentPage ? 'page' : null}
+            className={`pagination-button ${page === pageNo ? 'active' : ''}`}
+            onClick={() =>
+              this.setState({pageNo: page}, () => apiCallback(page))
+            }
           >
             {page}
           </button>
@@ -80,11 +100,9 @@ class Pagination extends Component {
 
         <button
           type="button"
-          onClick={this.handleNextClick}
-          disabled={currentPage === totalPages}
           className="pagination-button"
-          data-testid="next-button"
-          aria-label="Next page"
+          onClick={this.onNextPage}
+          disabled={pageNo === totalPages}
         >
           Next
         </button>

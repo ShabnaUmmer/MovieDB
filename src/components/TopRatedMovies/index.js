@@ -38,8 +38,8 @@ class TopRatedMovies extends Component {
     }
   }
 
-  handlePageChange = page => {
-    this.fetchTopRatedMovies(page)
+  handlePageChange = pageNo => {
+    this.fetchTopRatedMovies(pageNo)
   }
 
   render() {
@@ -64,9 +64,9 @@ class TopRatedMovies extends Component {
         </div>
         {totalPages > 1 && (
           <Pagination
-            currentPage={currentPage}
+            apiCallback={this.handlePageChange}
             totalPages={totalPages}
-            onPageChange={this.handlePageChange}
+            currentPage={currentPage}
           />
         )}
       </div>

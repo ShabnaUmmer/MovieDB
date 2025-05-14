@@ -16,8 +16,7 @@ class PopularMovies extends Component {
   }
 
   componentDidMount() {
-    const {currentPage} = this.state
-    this.fetchPopularMovies(currentPage)
+    this.fetchPopularMovies(1)
   }
 
   fetchPopularMovies = async page => {
@@ -38,10 +37,9 @@ class PopularMovies extends Component {
     }
   }
 
-  handlePageChange = page => {
-    this.setState({currentPage: page}, () => {
-      this.fetchPopularMovies(page)
-    })
+  handlePageChange = pageNo => {
+    this.setState({currentPage: pageNo})
+    this.fetchPopularMovies(pageNo)
   }
 
   render() {
@@ -66,9 +64,9 @@ class PopularMovies extends Component {
         </div>
         {totalPages > 1 && (
           <Pagination
-            currentPage={currentPage}
+            apiCallback={this.handlePageChange}
             totalPages={totalPages}
-            onPageChange={this.handlePageChange}
+            currentPage={currentPage}
           />
         )}
       </div>
