@@ -1,9 +1,9 @@
 {
-  "name": "app-name",
+  "name": "MovieDB",
   "private": true,
   "version": "1.0.0",
   "engines": {
-    "node": "^10.13 || 12 || 14 || 15",
+    "node": "22.x",
     "npm": ">=6"
   },
   "dependencies": {
