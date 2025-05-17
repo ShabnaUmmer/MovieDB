@@ -2,49 +2,22 @@ import React from 'react'
 import './index.css'
 
 class Pagination extends React.Component {
-  state = {
-    pageNo: 1,
-  }
-
   onNextPage = () => {
-    const {apiCallback, totalPages} = this.props
-    this.setState(
-      prevState => {
-        if (prevState.pageNo < totalPages) {
-          return {
-            pageNo: prevState.pageNo + 1,
-          }
-        }
-        return prevState
-      },
-      () => {
-        const {pageNo} = this.state
-        apiCallback(pageNo)
-      },
-    )
+    const {apiCallback, totalPages, currentPage} = this.props
+    if (currentPage < totalPages) {
+      apiCallback(currentPage + 1)
+    }
   }
 
   onPrevPage = () => {
-    const {apiCallback} = this.props
-    this.setState(
-      prevState => {
-        if (prevState.pageNo > 1) {
-          return {
-            pageNo: prevState.pageNo - 1,
-          }
-        }
-        return prevState
-      },
-      () => {
-        const {pageNo} = this.state
-        apiCallback(pageNo)
-      },
-    )
+    const {apiCallback, currentPage} = this.props
+    if (currentPage > 1) {
+      apiCallback(currentPage - 1)
+    }
   }
 
   render() {
-    const {pageNo} = this.state
-    const {totalPages, apiCallback} = this.props
+    const {totalPages, currentPage, apiCallback} = this.props
 
     const maxVisiblePages = 5
     let startPage
@@ -57,15 +30,15 @@ class Pagination extends React.Component {
       const maxPagesBeforeCurrent = Math.floor(maxVisiblePages / 2)
       const maxPagesAfterCurrent = Math.ceil(maxVisiblePages / 2) - 1
 
-      if (pageNo <= maxPagesBeforeCurrent) {
+      if (currentPage <= maxPagesBeforeCurrent) {
         startPage = 1
         endPage = maxVisiblePages
-      } else if (pageNo + maxPagesAfterCurrent >= totalPages) {
+      } else if (currentPage + maxPagesAfterCurrent >= totalPages) {
         startPage = totalPages - maxVisiblePages + 1
         endPage = totalPages
       } else {
-        startPage = pageNo - maxPagesBeforeCurrent
-        endPage = pageNo + maxPagesAfterCurrent
+        startPage = currentPage - maxPagesBeforeCurrent
+        endPage = currentPage + maxPagesAfterCurrent
       }
     }
 
@@ -80,7 +53,7 @@ class Pagination extends React.Component {
           type="button"
           className="pagination-button"
           onClick={this.onPrevPage}
-          disabled={pageNo === 1}
+          disabled={currentPage === 1}
         >
           Prev
         </button>
@@ -89,10 +62,10 @@ class Pagination extends React.Component {
           <button
             type="button"
             key={page}
-            className={`pagination-button ${page === pageNo ? 'active' : ''}`}
-            onClick={() =>
-              this.setState({pageNo: page}, () => apiCallback(page))
-            }
+            className={`pagination-button ${
+              page === currentPage ? 'active' : ''
+            }`}
+            onClick={() => apiCallback(page)}
           >
             {page}
           </button>
@@ -102,7 +75,7 @@ class Pagination extends React.Component {
           type="button"
           className="pagination-button"
           onClick={this.onNextPage}
-          disabled={pageNo === totalPages}
+          disabled={currentPage === totalPages}
         >
           Next
         </button>
