@@ -34,6 +34,13 @@
   letter-spacing: 2px;
 }
 
+.navbar-logo h1,
+.navbar-link h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
 .navbar-link {
   color: #fff;
   text-decoration: none;
