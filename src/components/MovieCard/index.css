@@ -22,9 +22,11 @@
   margin-top: 0;
 }
 .movie-poster {
-  height: 400px;
-  width: auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3; 
   border-radius: 12px;
+  object-fit: cover;
 }
 
 .movie-rating {
@@ -53,6 +55,7 @@
 .vd-btn:hover {
   background-color: #0099c3;
 }
+
 .vd-btn {
   background: none;
   border: none;
@@ -61,4 +64,10 @@
   color: white;
   font-size: 20px;
   padding: 10px 20px;
+}
+
+@media (max-width: 480px) {
+  .movie-card {
+    max-width: 100%;
+  }
 }
