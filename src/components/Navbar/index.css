@@ -160,6 +160,7 @@
     gap: 18px;
   }
   .navbar-search {
+    order: 3;
     width: 100%;
     max-width: 280px;
     justify-content: center;
