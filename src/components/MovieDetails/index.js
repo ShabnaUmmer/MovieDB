@@ -1,4 +1,6 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {FaArrowLeft, FaPlay, FaTimes} from 'react-icons/fa'
 import {
   API_KEY,
   API_BASE_URL,
@@ -13,6 +15,8 @@ class MovieDetails extends Component {
   state = {
     movie: null,
     cast: [],
+    trailerKey: null,
+    showTrailer: false,
     loading: true,
     error: null,
   }
@@ -23,6 +27,7 @@ class MovieDetails extends Component {
     const {id} = params
     this.fetchMovieDetails(id)
     this.fetchMovieCast(id)
+    this.fetchMovieVideos(id)
   }
 
   fetchMovieDetails = id => {
@@ -52,8 +57,32 @@ class MovieDetails extends Component {
       })
   }
 
+  fetchMovieVideos = id => {
+    fetch(`${API_BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
+      .then(response => response.json())
+      .then(data => {
+        const trailer = data.results.find(
+          video => video.type === 'Trailer' && video.site === 'YouTube',
+        )
+        if (trailer) {
+          this.setState({trailerKey: trailer.key})
+        }
+      })
+      .catch(() => {
+        this.setState({trailerKey: null})
+      })
+  }
+
+  openTrailer = () => {
+    this.setState({showTrailer: true})
+  }
+
+  closeTrailer = () => {
+    this.setState({showTrailer: false})
+  }
+
   render() {
-    const {movie, cast, loading, error} = this.state
+    const {movie, cast, trailerKey, showTrailer, loading, error} = this.state
 
     if (loading) return <div className="loading">Loading...</div>
     if (error) return <div className="error">Error: {error}</div>
@@ -61,6 +90,11 @@ class MovieDetails extends Component {
 
     return (
       <div className="movie-details-page">
+        <Link to="/" className="back-button">
+          <FaArrowLeft />
+          <span>Back to Movies</span>
+        </Link>
+
         <div className="movie-backdrop">
           <div className="backdrop-overlay">
             <div className="movie-poster-container">
@@ -96,6 +130,17 @@ class MovieDetails extends Component {
                     {movie.vote_average.toFixed(1)}
                   </span>
                 </div>
+
+                {trailerKey && (
+                  <button
+                    type="button"
+                    className="trailer-button"
+                    onClick={this.openTrailer}
+                  >
+                    <FaPlay />
+                    <span>Watch Trailer</span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -112,7 +157,6 @@ class MovieDetails extends Component {
             <h2>Cast</h2>
             <div className="cast-grid">
               {cast.map(person => {
-                // Construct proper URL with HTTPS and correct base
                 const imageUrl = person.profile_path
                   ? `${IMAGE_BASE_URL}${PROFILE_SIZE}${person.profile_path}`
                   : 'https://via.placeholder.com/150x225?text=No+Image'
@@ -124,7 +168,6 @@ class MovieDetails extends Component {
                       alt={person.name}
                       className="cast-image"
                       onError={e => {
-                        console.error('Failed to load:', imageUrl)
                         e.target.onerror = null
                         e.target.src =
                           'https://via.placeholder.com/150x225?text=No+Image'
@@ -141,6 +184,33 @@ class MovieDetails extends Component {
             </div>
           </section>
         </div>
+
+        {showTrailer && trailerKey && (
+          <div className="trailer-modal-overlay" onClick={this.closeTrailer}>
+            <div
+              className="trailer-modal-content"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="close-trailer-button"
+                onClick={this.closeTrailer}
+                aria-label="Close trailer"
+              >
+                <FaTimes />
+              </button>
+              <iframe
+                width="100%"
+                height="100%"
+                src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1`}
+                title="Movie Trailer"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        )}
       </div>
     )
   }
