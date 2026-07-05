@@ -58,7 +58,9 @@ class MovieDetails extends Component {
   }
 
   fetchMovieVideos = id => {
-    fetch(`${API_BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`)
+    fetch(
+      `${API_BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`,
+    )
       .then(response => response.json())
       .then(data => {
         const trailer = data.results.find(
@@ -186,10 +188,25 @@ class MovieDetails extends Component {
         </div>
 
         {showTrailer && trailerKey && (
-          <div className="trailer-modal-overlay" onClick={this.closeTrailer}>
+          <div
+            className="trailer-modal-overlay"
+            role="button"
+            tabIndex={0}
+            aria-label="Close trailer"
+            onClick={this.closeTrailer}
+            onKeyDown={e => {
+              if (e.key === 'Enter' || e.key === 'Escape') {
+                this.closeTrailer()
+              }
+            }}
+          >
             <div
               className="trailer-modal-content"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Movie trailer"
               onClick={e => e.stopPropagation()}
+              onKeyDown={e => e.stopPropagation()}
             >
               <button
                 type="button"
