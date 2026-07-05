@@ -1,12 +1,12 @@
 import {Component} from 'react'
 import {Link, withRouter} from 'react-router-dom'
+import {FaSearch} from 'react-icons/fa'
 import './index.css'
 
 class Navbar extends Component {
   state = {
     searchQuery: '',
   }
-
   handleSearchChange = event => {
     this.setState({searchQuery: event.target.value})
     const {history} = this.props
@@ -14,7 +14,6 @@ class Navbar extends Component {
       history.push('/')
     }
   }
-
   handleSearchSubmit = e => {
     e.preventDefault()
     const {searchQuery} = this.state
@@ -23,7 +22,6 @@ class Navbar extends Component {
       history.push(`/search?query=${encodeURIComponent(searchQuery)}`)
     }
   }
-
   render() {
     const {searchQuery} = this.state
     return (
@@ -61,8 +59,9 @@ class Navbar extends Component {
               type="submit"
               className="search-button"
               data-testid="search-button"
+              aria-label="Search"
             >
-              Search
+              <FaSearch />
             </button>
           </form>
         </div>
@@ -70,5 +69,4 @@ class Navbar extends Component {
     )
   }
 }
-
 export default withRouter(Navbar)
