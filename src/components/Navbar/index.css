@@ -91,18 +91,21 @@
   align-items: center;
   position: relative;
   flex-shrink: 0;
+  width: 100%;          
+  max-width: 300px;    
 }
 
 .search-input {
+  width: 100%;   
   padding: 0.55rem 2.6rem 0.55rem 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   outline: none;
   font-size: 0.9rem;
-  width: 200px;
   background: rgba(255, 255, 255, 0.08);
   color: #fff;
-  transition: width 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;   /* critical fix */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .search-input::placeholder {
@@ -157,8 +160,8 @@
     gap: 18px;
   }
   .navbar-search {
-    order: 3;
     width: 100%;
+    max-width: 280px;
     justify-content: center;
   }
   .navbar-link h2 {
@@ -166,7 +169,7 @@
   }
   .search-input {
     width: 100%;
-    max-width: 280px;
+    max-width: none; 
   }
   .search-input:focus {
     width: 100%;
@@ -187,5 +190,8 @@
   }
   .search-button {
     font-size: 15px;
+  }
+  .navbar-search {
+    max-width: 220px;
   }
 }
